@@ -1,1 +1,1 @@
-{"name":"말랑포커 - 둘이서 즐기는 텍사스 홀덤","short_name":"말랑포커","description":"회원가입 없이 멀리서 둘이 즐기는 가상 칩 텍사스 홀덤","lang":"ko","start_url":"./","scope":"./","display":"standalone","background_color":"#fff7f2","theme_color":"#fff7f2","icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}]}
+{"name":"말랑포커 — 온라인 2~5인 홀덤","short_name":"말랑포커","description":"최대 5명과 무료 가상 칩으로 즐기는 온라인 포커","start_url":"./","display":"standalone","background_color":"#fff6f0","theme_color":"#df93a9","icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
