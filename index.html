@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#fff7f2">
+  <meta name="description" content="우리 둘만의 말랑포커. 멀리 떨어져 있어도 모바일로 함께하는 2인 텍사스 홀덤!">
+  <title>말랑포커 · 우리 둘만의 카드게임</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <div class="floating-heart heart-a">♥</div><div class="floating-heart heart-b">♡</div>
+ <main class="shell">
+  <header class="topbar">
+   <div class="brand"><span class="brand-icon">♥</span><div><strong>말랑포커</strong><small>우리 둘만의 텍사스 홀덤</small></div></div>
+   <button class="icon-btn" id="rulesBtn" title="게임 설명">?<span class="desktop-only"> 규칙</span></button>
+  </header>
+  <section class="lobby panel" id="lobby">
+   <div class="big-illustration" aria-hidden="true"><span class="card-deco left">A<span>♥</span></span><span class="sparkle">✦</span><span class="card-deco right">K<span>♠</span></span></div>
+   <p class="eyebrow">멀리 있어도 같은 테이블</p>
+   <h1>둘이서 즐기는<br><em>포근한 포커 한 판 ♡</em></h1>
+   <p class="sub">로그인 필요 없이 방을 만들고, 코드를 공유하면 바로 시작할 수 있어요.</p>
+   <label class="field-label" for="nickname">내 별명 <span>(선택)</span></label>
+   <input id="nickname" type="text" maxlength="12" placeholder="예: 토끼" autocomplete="nickname">
+   <button id="createBtn" class="btn btn-primary wide">♡ 새 방 만들기</button>
+   <div class="lobby-separator"><span>또는</span></div>
+   <label class="field-label" for="roomInput">상대가 보낸 방 코드</label>
+   <div class="join-row"><input id="roomInput" maxlength="6" inputmode="text" placeholder="6자리 코드" autocapitalize="characters" spellcheck="false"><button id="joinBtn" class="btn btn-outline">입장하기</button></div>
+   <div class="status-block" id="lobbyStatus" role="status"></div>
+   <div class="lobby-note">무료 가상 칩으로만 플레이해요 · 현금 거래 기능 없음</div>
+  </section>
+  <section id="waitScreen" class="wait-screen panel hidden">
+   <div class="wait-emblem">♥</div>
+   <h2>방이 열렸어요!</h2><p>상대에게 이 코드를 보내주세요.</p>
+   <div class="room-code" id="roomCode">------</div>
+   <button class="btn btn-primary wide" id="copyCodeBtn">코드 복사하기</button>
+   <button class="btn btn-ghost wide" id="shareBtn">초대 링크 공유하기</button>
+   <div id="waitMessage" class="wait-message">상대방의 입장을 기다리는 중…</div>
+   <button class="text-btn" id="leaveWaitBtn">처음으로 돌아가기</button>
+  </section>
+  <section id="gameScreen" class="game-screen hidden">
+    <div class="game-toolbar"><span class="room-chip">방 <b id="shortRoom">------</b></span><span id="connectionLabel" class="connection-label">● 연결됨</span><button id="leaveGameBtn" class="text-btn">나가기</button></div>
+    <div class="table-stage">
+      <div class="table-felt">
+        <div class="table-caption">MALLANG POKER · ♥</div>
+        <div class="player opponent" id="opponentBox"><div class="player-top"><span class="avatar">🐻</span><div class="player-info"><b id="opponentName">상대</b><small id="opponentDealer"></small></div><span class="chip-total" id="opponentStack">1,000 <small>칩</small></span></div><div class="hole-cards" id="opponentCards"></div><div class="player-bet" id="opponentBet"></div></div>
+        <div class="board-area"><div class="pot-pill">모인 칩 <b id="potValue">0</b></div><div class="community" id="communityCards"></div><div class="street-label" id="streetLabel">시작 전</div></div>
+        <div class="player self" id="selfBox"><div class="player-bet" id="selfBet"></div><div class="hole-cards" id="myCards"></div><div class="player-top"><span class="avatar">🐰</span><div class="player-info"><b id="myName">나</b><small id="myDealer"></small></div><span class="chip-total" id="myStack">1,000 <small>칩</small></span></div></div>
+      </div>
+    </div>
+    <div class="action-panel panel">
+      <div class="last-action" id="lastAction">새 판을 준비하고 있어요</div>
+      <div class="turn-indicator" id="turnIndicator">상대방을 기다리는 중…</div>
+      <div class="result-panel hidden" id="resultPanel"><b id="resultText"></b><span id="rankText"></span></div>
+      <div class="action-buttons" id="actionButtons">
+       <button id="foldBtn" class="btn btn-fold">폴드</button>
+       <button id="checkCallBtn" class="btn btn-primary">체크</button>
+       <button id="raiseBtn" class="btn btn-raise">레이즈 +20</button>
+       <button id="allInBtn" class="btn btn-outline">최대 베팅</button>
+      </div>
+      <button id="nextHandBtn" class="btn btn-primary wide hidden">다음 판 시작하기 ♥</button>
+      <div class="reaction-row"><span>응원 보내기</span><button data-reaction="♥" aria-label="하트">♥</button><button data-reaction="👏" aria-label="박수">👏</button><button data-reaction="😎" aria-label="선글라스">😎</button></div>
+    </div>
+    <div class="reaction-toast hidden" id="reactionToast">♥</div>
+  </section>
+  <footer>♥ 함께하는 시간이 더 특별해져요</footer>
+ </main>
+ <dialog id="rulesDialog"><div class="modal-head"><h2>포커 규칙 ♠</h2><button id="closeRulesBtn" class="icon-btn" aria-label="닫기">×</button></div><p>말랑포커는 <b>2인 텍사스 홀덤</b>이에요. 처음에 각자 1,000칩을 갖고 시작해요.</p><ol><li>각자 카드 2장을 받아요. 상대방 카드는 마지막까지 비밀!</li><li>테이블에 공용 카드가 <b>3장 → 1장 → 1장</b> 순서로 공개돼요.</li><li>차례가 오면 체크, 콜, 레이즈, 폴드 또는 최대 베팅을 선택해요.</li><li>끝까지 간다면 자신의 카드 2장과 공용 카드 5장 중 <b>최고의 5장 조합</b>으로 승부해요.</li></ol><p class="tiny-rule">족보: 스트레이트 플러시 &gt; 포카드 &gt; 풀하우스 &gt; 플러시 &gt; 스트레이트 &gt; 트리플 &gt; 투페어 &gt; 원페어 &gt; 하이카드</p><p class="tiny-rule">방장은 창을 열어둬야 연결이 유지돼요. 모바일의 절전 모드나 일부 네트워크에서는 연결이 끊길 수 있어요.</p><button class="btn btn-primary wide" id="okayRulesBtn">알겠어요 ♡</button></dialog>
+ <script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.5/dist/peerjs.min.js"></script>
+ <script src="poker-core.js"></script><script src="main.js"></script>
+</body>
+</html>
